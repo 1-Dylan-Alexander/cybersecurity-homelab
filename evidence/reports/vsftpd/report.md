@@ -1,0 +1,149 @@
+# VSFTPD 2.3.4 Vulnerability Assessment
+
+## 1. Assessment Scope
+
+Date: October 12, 2026
+
+Analyst: Dylan Alexander
+
+Target: Metasploitable 2
+
+Target IP: 192.168.56.103
+
+Assessment System: Kali Linux
+
+Kali IP: 192.168.56.102
+
+Virtualization Platform: Oracle VirtualBox
+
+Network Configuration: Host-only network (192.168.56.0/24)
+
+## Objective
+
+Identify and document potentially vulnerable services
+running on Metasploitable 2 within an isolated lab network.
+
+The assessment focuses on FTP service enumeration,
+version identification, and vulnerability analysis.
+
+
+## 2. Service Enumeration
+
+### Command Executed
+
+```bash
+sudo nmap -sV -p 21 --script=ftp-syst 192.168.56.103
+```
+
+### Command Breakdown
+
+- `sudo`: Executes Nmap with administrator privileges.
+- `nmap`: Network scanning and enumeration tool.
+- `-sV`: Attempts to identify the service and its version.
+- `-p 21`: Scans TCP port 21, commonly used for FTP.
+- `--script=ftp-syst`: Runs an Nmap script that requests FTP server status information.
+- `192.168.56.103`: The target IP address.
+
+### Findings
+
+- Port 21/tcp: Open
+- Service: FTP
+- Software: vsftpd
+- Reported version: 2.3.4
+- FTP control connection: Plain text
+- FTP data connection: Plain text
+
+Evidence file: ftp-enumeration.txt
+
+
+## 3. Vulnerability Analysis
+
+### Potential Vulnerability
+
+- CVE: CVE-2011-2523
+- Affected software: vsftpd 2.3.4
+- Vulnerability type: Malicious backdoor
+- Potential impact: Unauthorized remote command execution
+- Assessment status: Potentially vulnerable; not confirmed
+
+### Technical Explanation
+
+In 2011, attackers compromised a distribution archive
+of vsftpd 2.3.4 and inserted malicious backdoor code.
+
+The compromised software could allow an attacker to
+execute commands remotely with elevated privileges.
+
+Not every installation identifying itself as vsftpd
+2.3.4 necessarily contains the malicious backdoor.
+
+### Evidence Collected
+
+Nmap identified the FTP service as vsftpd 2.3.4.
+
+Metasploit's vulnerability check also identified
+a version banner associated with the backdoor.
+
+Neither observation independently confirms that
+the malicious backdoor is present.
+
+### Risk Assessment
+
+Potential severity: Critical, if the backdoor is present.
+
+Confirmed severity: Not established.
+
+Further validation would be required before reporting
+the backdoor as a confirmed vulnerability.
+
+
+## 4. Remediation Recommendations
+
+### Recommended Actions
+
+1. Remove any installation obtained from the
+   compromised vsftpd 2.3.4 distribution archive.
+
+2. Install a supported version of vsftpd from
+   a trusted operating system repository.
+
+3. Disable FTP if it is not required.
+
+4. Consider SFTP for encrypted file transfers.
+
+5. Restrict network access using firewall rules.
+
+6. Rescan the system after remediation.
+
+### Lab Considerations
+
+Metasploitable 2 is intentionally vulnerable.
+
+The FTP service will remain unchanged to preserve
+the environment for future authorized security labs.
+
+
+## 5. Assessment Conclusion
+
+The assessment identified an FTP service running
+vsftpd 2.3.4 on TCP port 21 of Metasploitable 2.
+
+This software version is associated with
+CVE-2011-2523, a historical malicious backdoor.
+
+Nmap confirmed the service version, and Metasploit's
+vulnerability check identified a potentially
+vulnerable version banner.
+
+However, the available evidence does not confirm
+that the malicious backdoor is present or exploitable.
+
+Assessment Status: Potential vulnerability identified.
+
+Exploitation Status: Not performed.
+
+Further validation would be necessary to confirm
+the vulnerability.
+
+The assessment was conducted within an isolated
+VirtualBox laboratory environment.
