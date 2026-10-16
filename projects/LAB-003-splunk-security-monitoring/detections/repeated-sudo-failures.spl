@@ -1,0 +1,7 @@
+index=* source="/var/log/auth.log" "incorrect password attempts"
+| rex field=_raw "sudo:\s+(?<account>\S+)\s+:\s+(?<failed_attempts>\d+) incorrect password attempts"
+| eval failed_attempts=tonumber(failed_attempts)
+| bin _time span=5m
+| stats sum(failed_attempts) AS total_failures by _time host account
+| where total_failures >= 3
+| sort - _time
