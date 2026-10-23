@@ -1,7 +1,7 @@
-# Network Traffic Analysis — Lab 01
+# LAB-001 — Network Traffic Analysis with tcpdump
 
 ## Overview
-This blue-team lab introduces network packet capture, traffic filtering, and baseline analysis using tcpdump. It builds on the existing VSFTPD 2.3.4 vulnerability assessment in the cybersecurity-homelab repository.
+This blue-team lab introduces network packet capture, traffic filtering, and baseline analysis using tcpdump. It provides a foundation for later network investigation and vulnerability-assessment projects in this repository.
 
 ## Objectives
 - Identify network capture interfaces.
@@ -87,7 +87,7 @@ This lab established an initial network traffic baseline for the isolated Kali�
 4. Analyze TCP handshakes and FTP traffic.
 5. Correlate packet evidence with the existing VSFTPD 2.3.4 vulnerability assessment.
 
-## Related Work
-Repository: https://github.com/1-Dylan-Alexander/cybersecurity-homelab
+## Related work
 
-Previous project: VSFTPD 2.3.4 vulnerability assessment.
+- [← Portfolio home](../../README.md)
+- [LAB-002 — VSFTPD 2.3.4 Vulnerability Assessment](../LAB-002-vsftpd-vulnerability-assessment/README.md)

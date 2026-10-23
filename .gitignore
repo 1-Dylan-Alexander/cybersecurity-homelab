@@ -38,3 +38,19 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# Private security evidence and host artifacts (retain outside public Git)
+*.evtx
+*.etl
+*.dmp
+*.hprof
+*.kdbx
+evidence/private/
+**/private/
+**/originals/
+
+# Additional authentication material
+id_rsa
+id_ed25519
+*.ovpn
+*.mobileconfig
