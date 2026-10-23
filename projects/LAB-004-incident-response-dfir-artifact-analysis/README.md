@@ -4,6 +4,12 @@
 > **Assessment:** Completed simulation, SIEM investigation, native event-log acquisition, and SHA-256 integrity verification  
 > **Case date:** 2026-10-19 (local times: Pacific Daylight Time)
 
+## Executive investigation summary
+
+An authorized Kali-to-Windows RDP exercise generated Windows Security logon events (4625/4624), PowerShell and scheduled-task activity, and Sysmon process/file telemetry (IDs 1/11). These records were correlated in Splunk to produce a timeline. Native `.evtx` exports were hashed before transfer and their USB copies verified with SHA-256. This exercise **did not involve an actual attacker, unauthorized compromise, or confirmed malicious persistence**.
+
+**Reviewer links:** [← Portfolio home](../../README.md) · [Detailed investigation report](reports/investigation-report.md) · [Evidence publication boundaries](../../docs/evidence-handling.md)
+
 ## Objectives
 
 - Generate and investigate a realistic sequence of Windows authentication and post-login activity in an isolated lab.
